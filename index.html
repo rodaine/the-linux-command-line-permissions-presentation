@@ -3,8 +3,7 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-	<title>CSSS: A brief introduction</title>
-	
+	<title>Command-Fu: The Linux Command Line > Permissions</title>
 	<link href="slideshow.css" rel="stylesheet" />
 	<link href="theme.css" rel="stylesheet" />
 	<link href="talk.css" rel="stylesheet" />
@@ -14,244 +13,262 @@
 
 <header id="intro" class="slide">
 	<h1>
-		<object data="logo.svg" width="100%" type="image/svg+xml">
-			<img src="logo.png" alt="CSSS: CSS-based SlideShow System" />
-		</object>
+		Command-Fu : The Linux Command Line<br/>
+		<span class="subtitle">Chapter 9 &times; Permissions</span>
 	</h1>
-	<p class="attribution">By Lea Verou</p>
+	<p class="attribution">Chris Roche</p>
 </header>
-<section>
-	<header class="slide">
-		<h1>Introduction</h1>
-	</header>
-	
+
 	<section class="slide" title="CSSS: Introduction">
-		<h2>What is it?</h2>
-		<p>A simple framework for building presentations with modern web standards</p>
-		<ul>
-			<li class="delayed">An HTML file contains the whole presentation</li>
-			<li class="delayed">Themes as CSS files</li>
-			<li class="delayed">JavaScript handles what CSS can't (keyboard shortcuts etc)</li>
-		</ul>
-	</section>
-	
-	<section class="slide">
 		<h2>History</h2>
+		<p>Users &amp; permissions are not a "recent innovation" of the *nix system</p>
 		<ul>
-			<li class="delayed">I had to create a presentation for my talk at <a href="http://front-trends.com">Front Trends 2010</a></li>
-			<li class="delayed">The only web-based presentation systems I knew of didn't fit my needs</li>
-			<li class="delayed">&hellip;so I rolled up my own</li>
-			<li class="delayed">FT2010 attendees asked me to release it</li>
-			<li class="delayed">and here it is! ;-)</li>
-		</ul>
-	</section>
-	
-	<section class="slide" id="navigation">
-		<h2>Navigation</h2>
-		<p>Only through keyboard for now :(</p>
-		<ul>
-			<li>→ or ↓ to advance to the next slide or incrementally displayed item</li>
-			<li>← or ↑ to go to the previous slide or incrementally displayed item</li>
-			<li>Ctrl* + → or Ctrl* + ↓ to jump to the next slide</li>
-			<li>Ctrl* + ← or Ctrl* + ↑ to jump to the previous slide</li>
-			<li>Home to go to the first slide, End to go to the last</li>
-			<li>Ctrl* + G to jump to an arbitrary slide (by slide number or identifier)</li>
-		</ul>
-		<p>* Ctrl or Shift actually. Only Shift works in Opera.</p>
-	</section>
-</section>
-
-<section>
-	<header class="slide">
-		<h1>Features</h1>
-	</header>
-	
-	<section class="slide">
-		<h2>Thumbnail view</h2>
-		<p>Press Ctrl+H (or Shift+H if you're in Opera) now.</p>
-		<p class="delayed">Cool, huh? You can press Ctrl+Shift+H to see all slides (warning: can be slow!)</p>
-	</section>
-	
-	<section class="slide">
-		<h2>Timer</h2>
-		<ul>
-			<li>Timer in the form of a progress bar on the top</li>
-			<li>Define the talk duration with the attribute <code>data-duration</code> on the <code>body</code></li>
-			<li>Style the timer and the end state with the selectors <code>#timer</code> and <code>#timer.end</code> respectively.</li>
+			<li class="delayed">Pre-"personal" computers were monolithic with many terminals</li>
+			<li class="delayed">Many users connected and using the system simultaneously (ex: <code>ssh</code>)</li>
+			<li class="delayed">Needed a way to protect users and files from each other</li>
 		</ul>
 	</section>
 	
 	<section class="slide">
-		<h2>Presenter view</h2>
-		<p>This slide has presenter notes. They are only visible in presenter view (Ctrl+P or Shift+P).</p>
-		<p class="presenter-notes">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-	</section>
-	
-	<section class="slide">
-		<style scoped>
-			h2 {
-				font-size: 200%;
-				font-weight: bold;
-			}
-		</style>
-		<h2><code>&lt;style scoped /&gt;</code></h2>
-		<p>You can use the HTML5 <code>scoped</code> attribute on style elements in slides, to only style the current slide or inside sections that include multiple slides to style all of them and nothing else.</p>
-		<p>For example, inspect this slide and then run <code>$$('style[scoped]')[0].sheet.cssRules[0].selectorText</code> in the console to see how the original selector gets changed.</p>
-	</section>
-	
-	<section class="slide">
-		<h2>More features</h2>
+		<h2>Commands</h2>
 		<ul>
-			<li class="delayed">IDs are dynamically assigned by JavaScript&hellip;</li>
-			<li class="delayed">&hellip;but you can also assign your own, bringing the best of both worlds</li>
-			<li class="delayed">Incremental display of slide contents (just add <code>class="delayed"</code>)</li>
-			<li class="delayed">Slide scaling based on window size (size everything you want to be scalable in ems)</li>
-			<li class="delayed">Document.title changing according to slide title (fetched either from the <code>title</code> attribute or the slide's heading)</li>
+			<li class="delayed"><code>id</code> Display user identity</li>
+			<li class="delayed"><code>chmod</code> Change file permissions</li>
+			<li class="delayed"><code>umask</code> Set default permissions</li>
+			<li class="delayed"><code>su</code> Run a shell as another user</li>
+			<li class="delayed"><code>sudo</code> Execute a command as another user</li>
+			<li class="delayed"><code>chown</code> Change file ownership</li>
+			<li class="delayed"><code>chgrp</code> Change group ownership</li>
+			<li class="delayed"><code>passwd</code> Change a user's password</li>
 		</ul>
 	</section>
 	
 	<section class="slide">
-		<h2>Drawbacks</h2>
+		<h2><code>id</code></h2>
+		<p><pre class="delayed"><code>$ id
+uid=500(me) gid=500(me) groups=500(me)</code></pre></p>
 		<ul>
-			<li>Only supports modern browsers. Why?
+			<li class="delayed">uid - user id number (mapped to username in /etc/passwd)
 				<ul>
-					<li>More lightweight</li>
-					<li>Easier to understand code</li>	
-					<li>It's a presentation, so the environment is controlled anyway</li>
+					<li>/etc/passwd also contains "real" account name and home directory</li>
+					<li>/etc/passwd includes other "users" as well (like the superuser 0)</li>
 				</ul>
 			</li>
-			<li>No mouse click to advance to the next slide. I consider it annoying.</li>
-			<li>Doesn't work in mobile :(</li>
-		</ul>
-	</section>
-</section>
-
-<section>
-	<header class="slide">
-		<h1>Plugins</h1>
-	</header>
-	
-	<section class="slide">
-		<h2>Plugin: CSS Snippets</h2>
-		<pre>new CSSSnippet(document.getElementById('snippet'));</pre>
-		<ul>
-			<li>Dynamically edit CSS and reflect the results in any element's style
+			<li class="delayed">gid - primary group id of user (also in /etc/passwd)</li>
+			<li class="delayed">groups - groups that the user belongs (in /etc/group)
 				<ul>
-					<li>Which one? Specify a selector with the <code>data-subject</code> attribute or leave blank for the slide to be the subject</li>
-				</ul>
-			<li>Automatically prefixes CSS3 properties/values, when needed
-				<ul>
-					<li>Also does it with the style attribute (statically) if the element is not a text field (doesn't work in IE and Firefox 3.6)</li>
+					<li>On Mac: ~10 groups from the system</li>
 				</ul>
 			</li>
-			<li>Textarea automatically adjusts rows/font-size on line break (use class <code>dont-adjust</code> to turn off)</li>
 		</ul>
 	</section>
 	
 	<section class="slide">
-		<h2>CSS Snippets demo</h2>
-		<p>Edit the following CSS code:</p>
-		<textarea class="snippet">background-color:red;
-background-image: linear-gradient(red, #600)</textarea>
-	</section>
-	
-	<section class="slide" id="animation-demo">
-		<h2>CSS Snippets: raw CSS</h2>
-		<textarea class="snippet" data-raw>@keyframes rainbow {
-	from, to { background: red }
-	16% { background: yellow }
-	33% { background: green }
-	50% { background: aqua }
-	66% { background: blue }
-	83% { background: fuchsia }
-}
-
-#animation-demo { animation: 30s rainbow infinite; }</textarea>
-	</section>
-	
-	<section class="slide">
-		<h2>Plugin: CSS Controls</h2>
+		<h2>File Attributes</h2>
+		<p><pre><code>$ > foo.txt
+$ ls -l foo.txt
+-rw-rw-r-- 1 chris staff 0 2014-03-14 13:59 foo.txt</code></pre></p>
 		<ul>
-			<li>Use sliders and other controls to adjust CSS values
+			<li>First character is the file type:
 				<ul>
-					<li>Which one? Specify a selector with the <code>data-subject</code> attribute or leave blank for the slide to be the subject</li>
-					<li>Specify style with <code>data-style</code> (use <code>{value}</code> where the result will be)</li>
+					<li>- : A regular file</li>
+					<li>d : A directory</li>
+					<li>l : A symbolic link (in which case the other 9 characters are erroneous)</li>
+					<li>c : <em>Character Special File</em> (Device that handles a data stream, ex: terminal or modem)</li>
+					<li>b : <em>Block Special File</em> (Device that handles block data, ex: hard or disc drive)</li>
 				</ul>
-			<li>Automatically prefixes CSS3 properties/values, when needed</li>
+			</li>
 		</ul>
 	</section>
-	
-	<section class="slide" id="css-controls-demo">
-		<h2>CSS Controls demo</h2>
-		<label>Slide lightness: 
-			<input type="range" min="0" max="255" value="128" data-style="background-color:rgb({value}, {value}, {value});" class="css-control" />
-		</label>
-		<label>
-			border-width:
-			<input type="number" min="0" max="60" value="30" data-style="border-width: {value}px;" class="css-control" size="5" />
-		</label>
-		<label>
-			font-family:
-			<select data-style="font-family: {value};" class="css-control">
-				<option selected>sans-serif</option>
-				<option>Georgia, serif</option>
-				<option>Consolas, monospace</option>
-				<option>'Trebuchet MS', sans-serif</option>
-			</select>
-		</label>
-	</section>
-	
+
 	<section class="slide">
-		<h2>Plugin: Code highlight</h2>
+		<h2>File Attributes</h2>
+		<p><pre><code>$ > foo.txt
+$ ls -l foo.txt
+-rw-rw-r-- 1 chris staff 0 2014-03-14 13:59 foo.txt</code></pre></p>
 		<ul>
-			<li>Syntax highlighting for every <code>&lt;code&gt;</code> element with a <code>lang</code> attribute.</li>
-			<li>Only highlights when the slide becomes active, for performance</li>
-			<li>Currently only supports JavaScript, but it's easy to add any language</li>
-			<li>Styling done through easy to understand classes like <code>.string</code> or <code>.comment</code></li>
+			<li>Next 9 characters are the permissions for user, group, and <em>the world</em> in blocks of 3 characters:
+				<ul>
+					<li>r : read access to the file (ex: $ cat foo.txt)</li>
+					<li>w : write access to the file (ex: $ echo "bar" > foo.txt)</li>
+					<li>x : execution access to the file (ex: $ ./foo.txt)</li>
+					<li>- : doesn't have that particular permission</li>
+				</ul>
+			</li>
+			<li>Each block can be represented as:
+				<ul>
+					<li>3-digit binary # (- - - = 000 to rwx = 111)
+					<li>1-digit octal # (- - - = 0 to rwx = 7)
+				</ul>
+			</li>
 		</ul>
+	</section>
+
+	<section class="slide">
+		<h2><code>chmod</code></h2>
+		<p>Change the permissions on a file (owner or superuser only):</p>
+		<p><pre><code>$ chmod 600 foo.txt
+$ ls -l foo.txt
+-rw------- 1 chris staff 0 2014-03-14 13:59 foo.txt</code></pre></p>
+		<p>Can also set via the GUI if desired (on Mac: right+click/option+click > Get Info)</p>
+	</section>
+
+	<section class="slide">
+		<h2><code>chmod</code></h2>
+		<p>Can also use a symbolic notation:</p>
+		<p><pre><code>$ chmod u+x,go=rx foo.txt
+$ ls -l foo.txt
+-rwxr-xr-x 1 chris staff 0 2014-03-14 13:59 foo.txt</code></pre></p>
+	<ul>
+		<li>Blocks: u = user, g = group, o = others (world), a = all (u + g + o)</li>
+		<li>+ : Add permission to the block</li>
+		<li>- : Remove permission from the block</li>
+		<li>= : Set the permissions on the block</li>
+		<li>comma delimited</li>
+	</ul>
 	</section>
 	
 	<section class="slide">
-		<h2>Code highlight example</h2>
-		<pre><code lang="javascript">// Comment
-document.addEventListener('DOMAttrModified',function(e) {
-  var node = e.target, attr = e.attrName;
-  if(/^input$/i.test(node.nodeName) 
-    &amp;&amp; (attr === 'placeholder' || attr === 'value')
-    || foo > 5)
-      Placeholder.update(node);
-}, false);</code></pre>
+		<h2><code>umask</code></h2>
+		<p>Change default permissions via bit mask:</p>
+		<p><pre><code>$ umask
+0002
+$ > bar.txt
+$ ls -l bar.txt
+-rw-rw-r-- 1 chris staff 0 2014-03-14 13:59 bar.txt
+$ rm -f bar.txt
+$ umask 0000
+$ > bar.txt
+$ ls -l bar.txt
+-rw-rw-rw- 1 chris staff 0 2014-03-14 13:59 bar.txt</code></pre></p>
 	</section>
-</section>
+
+	<section class="slide">
+		<h2><code>umask</code></h2>
+		<p>Turn off permissions at the specified positions:</p>
+		<p><pre><code>original:   --- rw- rw- rw-
+mask(0022): 000 000 010 010
+result:     --- rw- r-- r--</code></pre></p>
+		<p>The leading block? Special permissions:</p>
+		<ul>
+			<li class="delayed">setuid bit (u+s) - execute the file as the file owner. Many superuser files have this flag</li>
+			<li class="delayed">setgid bit (g+s) - same but for group. If on dir, sets all new files inside to the dir's group(s)</li>
+			<li class="delayed">sticky bit (+t)  - on directory, files can be modified by owner, superuser, or directory owner (such as /tmp)</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2><code>su</code></h2>
+		<p>Run a shell as a different user:</p>
+		<p><pre><code>$ su -l zo
+$ whoami
+zo
+$ su -
+Password: #######
+$ whoami
+root
+$ exit
+$ whoami
+zo</p></pre></code>
+	</section>
+
+	<section class="slide">
+		<h2><code>su</code></h2>
+		<p>Can also run a command as another user:</p>
+		<p><pre><code>$ whoami
+chris
+$ su -c "> bar.txt"
+$ ls -l bar.txt
+-rw-rw-r-- 1 root staff 0 2014-03-14 13:59 bar.txt</p></pre></code>
+	</section>
+
+	<section class="slide">
+		<h2><code>sudo</code></h2>
+		<p>Execute a command as the superuser (or another user chosen by the admin)</p>
+		<p><pre><code>$ whoami
+chris
+$ rm -rf /
+Permission Denied
+$ sudo rm -rf /
+Password: ######
+Game Over, Son!</p></pre></code>
+<p>Quickly sudo the previous command: <code>sudo !!</code></p>
+	</section>
+
+	<section class="slide">
+		<h2><code>chown</code></h2>
+		<p>Change the ownership of a file:</p>
+		<p><pre><code>$ sudo touch ~zo/foo.txt
+$ sudo ls -l ~zo/foo.txt
+-rw-rw-r-- 1 root root 0 2014-03-14 13:59 foo.txt
+$ sudo chown zo: ~zo/foo.txt
+$ sudo ls -l ~zo/foo.txt
+-rw-rw-r-- 1 zo zo 0 2014-03-14 13:59 foo.txt</code></pre></p>
+		<ul>
+			<li> zo - Only changes the file owner (zo root)</li>
+			<li> zo:chris - Changes owner and group (zo chris)</li>
+			<li> :zo - Only changes the file group (root zo)</li>
+			<li> zo: - Changes both to the same thing (zo zo)</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2><code>chgrp</code></h2>
+		<p>Same as <code>chown</code> but can only change the group (kinda old Unix command)</p>
+	</section>
+
+	<section class="slide">
+		<h2><code>passwd</code></h2>
+		<p>Change a user's password:</p>
+		<p><pre><code>$ passwd
+(current) UNIX password: ######
+New UNIX password: #######
+BAD PASSWORD: is too similar to the old one
+New UNIX password: ##
+BAD PASSWORD: it is WAY too short
+New UNIX password: $$$$$$$
+
+sudo passwd zo
+New UNIX password: ######
+	</section>
+
+	<section class="slide">
+		<h2>Example: Shared Music Library</h2>
+		<p><pre><code>### logged in as chris ###
+#----- create music group and add users -----#
+$ groupadd music
+$ usermod -a -G music chris
+$ usermod -a -G music zo</code></pre></p>	
+<p><pre><code>#----- create shared folder -----#
+$ sudo mkdir /usr/local/share/Music
+$ sudo ls -ld /usr/local/share/Music
+drwxr-xr-x 2 root root 4096 2014-03-14 18:05 /usr/local/share/Music
+$ sudo chown :music /usr/local/share/Music
+$ sudo chmod 775 /usr/local/share/Music
+drwxrwxr-x 2 root music 4096 2014-03-14 18:05 /usr/local/share/Music</code></pre></p>		
+	</section>
+
+	<section class="slide">
+				<h2>Example: Shared Music Library, Cont.</h2>
+		<p><pre><code>#----- make all files added to folder accessible by music group -----#
+$ sudo chmod g+s /usr/local/share/Music
+$ ls -ld /usr/local/share/Music
+drwxrwsr-x root music 4096 2014-03-14 18:05 /usr/local/share/Music</code></pre></p>		
+<p><pre><code>#----- test adding files/directories -----#
+$ mkdir /usr/local/share/Music/One_Direction
+$ > /usr/local/share/Music/Friday_Rebecca_Black.mp3
+$ ls -l /usr/local/share/Music
+drwxrwsr-x 2 chris music 4096 2014-03-14 20:24 One_Direction
+-rw-rw-r-- 1 chris music 0 2014-03-14 20:22 Friday_Rebecca_Black.mp3</code></pre></p>		
+	</section>	
+
 <footer class="slide" title="The End">
 	<h2>Thank you!</h2>
-	<p>Get it or contribute at <a href="http://github.com/LeaVerou/CSSS">http://github.com/LeaVerou/CSSS</a></p>
-	<p>Credits:</p>
-	<ul>
-		<li><a href="http://lukeroberts.us/2008/12/wallpaper-colourful-wood/">Colored wood background by Luke Roberts</a></li>
-		<li>The name CSSS is actually inspired by S5, as you could probably guess ;-)</li>
-		<li>A big thanks to the community at Github for various contributions to this project</li>
-	</ul>
+	<p>Get it at <a href="http://www.rodaine.com/the-linux-command-line-permissions-presentation">rodaine.com/the-linux-command-line-permissions-presentation</a></p>
 </footer>
 
 <script src="slideshow.js"></script>
-<script src="plugins/css-edit.js"></script>
-<script src="plugins/css-snippets.js"></script>
-<script src="plugins/css-controls.js"></script>
-<script src="plugins/code-highlight.js"></script>
-<script>
-var slideshow = new SlideShow();
-
-var snippets = document.querySelectorAll('.snippet');
-for(var i=0; i<snippets.length; i++) {
-	new CSSSnippet(snippets[i]);
-}
-
-var cssControls = document.querySelectorAll('.css-control');
-for(var i=0; i<cssControls.length; i++) {
-	new CSSControl(cssControls[i]);
-}
-</script>
+<script>var slideshow = new SlideShow();</script>
 	
 </body>
 </html>

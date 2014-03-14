@@ -35,7 +35,7 @@
 	left:0;
 	z-index:1;
 	
-	font-size:250%;
+	font-size:200%;
 	line-height:1.6;
 }
  
@@ -234,6 +234,7 @@ button.onscreen-nav {
 /* Timer */
 
 #timer {
+	display: none;
 	position:absolute;
 	top:0;
 	left:0;

@@ -26,8 +26,7 @@ section > header.slide > h1 {
 }
 
 html {
-	background: black url(img/rainbow-wood.jpg) bottom center;
-	background-size: cover;
+	background: black;
 }
 
 body {
@@ -106,9 +105,13 @@ strong, b {
 	.slide h2 {
 		font-family: 'Helvetica Neue', Helvetica, sans-serif;
 		font-weight: 100;
-		font-size: 1.2in;
+		font-size: .75in;
 	}
 	
+	.slide p, .slide > ul {
+		margin: 0.5em 0;
+	}
+
 	.slide p,
 	.slide li {
 		font-weight: bold;
@@ -200,25 +203,17 @@ section > header.slide {
 }
 
 .attribution {
-	background: rgba(0,0,0,.8);
 	color: white;
 	display: block;
 	position: absolute;
+	text-align: center;
 	left: 0;
 	right: 0;
 	bottom: 1em;
 	padding: .5em 1em;
-	font-size: 30%;
 	text-shadow: .05em .05em .1em black;
 }
 
-	.attribution a {
-		text-decoration: none;
-	}
-	
-	.attribution a::after {
-		content:  ' (' attr(href) ')';
-	}
 
 /* Syntax highlighting */
 
